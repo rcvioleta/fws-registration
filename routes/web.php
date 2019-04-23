@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/register', function () {
-  return view('auth.login');
+  return view('home');
 });
 
 Auth::routes();
