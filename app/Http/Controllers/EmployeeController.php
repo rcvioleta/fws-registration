@@ -39,6 +39,20 @@ class EmployeeController extends Controller
     //
   }
 
+  public function register($id)
+  {
+    $employee = Employee::where('emp_id', '=', $id)->first();
+    $employee->registered = 1;
+    $employee->save();
+
+    return response()->json([
+      'emp_id' => $employee->emp_id,
+      'registered' => $employee->registered,
+      'message' => 'You are registered!',
+      'status' => 200
+    ]);
+  }
+
   /**
    * Display the specified resource.
    *

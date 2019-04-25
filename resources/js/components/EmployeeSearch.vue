@@ -7,7 +7,7 @@
           type="text"
           name="employee_id"
           class="form-control"
-          placeholder="Search Employee ID"
+          placeholder="Enter your EID"
           v-model="searchKey"
           @input="searchEmployees"
         >
@@ -20,6 +20,7 @@
               <th scope="col">First Name</th>
               <th scope="col">Last Name</th>
               <th scope="col">Project</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -28,6 +29,10 @@
               <td>{{ filteredEmployee.first_name }}</td>
               <td>{{ filteredEmployee.last_name }}</td>
               <td>{{ filteredEmployee.project }}</td>
+              <td>
+                <button class="btn btn-sm btn-success" disabled v-if="filteredEmployee.registered">All Set</button>
+                <button class="btn btn-sm btn-primary" @click="registerEmployee(filteredEmployee.emp_id)" v-else>Register</button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -41,23 +46,19 @@
 
 <script>
 import axios from "axios";
+import swal from 'sweetalert';
+
 export default {
   data() {
     return {
       employees: "",
       filteredEmployee: "",
       searchKey: "",
-      searchMessage: "Waiting for searches"
+      searchMessage: "Please enter your EID. Then hit the \"Register\" button once your info appear below."
     };
   },
   created() {
-    axios
-      .get("admin/employee")
-      .then(result => {
-        this.employees = result.data.data;
-        console.log(result);
-      })
-      .catch(err => console.log("error found", err));
+    this.fetchAllEmployees();
   },
   methods: {
     searchEmployees(event) {
@@ -68,8 +69,31 @@ export default {
       if (!this.filteredEmployee && this.searchKey) {
         this.searchMessage = "Employee not found";
       } else {
-        this.searchMessage = "Waiting for searches";
+        this.searchMessage = "Please enter your EID. Then hit the \"Register\" button once your info appear below.";
       }
+    },
+    registerEmployee(id) {
+      const uri = `/admin/employee/register/${id}`;
+      axios
+      .get(uri)
+      .then(update => {
+        console.log(update.data);
+        this.filteredEmployee.registered = update.data.registered;
+        swal('Movie Time!', update.data.message, 'success');
+        this.fetchAllEmployees();
+        this.searchKey = "";
+        this.filteredEmployee = "";
+      })
+      .catch(err => console.log(err))
+    },
+    fetchAllEmployees() {
+      axios
+      .get("/admin/employee")
+      .then(result => {
+        this.employees = result.data.data;
+        console.log(result);
+      })
+      .catch(err => console.log("error found", err));
     }
   }
 };

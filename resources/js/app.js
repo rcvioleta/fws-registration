@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('employee-component', require('./components/EmployeeSearch.vue').default);
+Vue.component('registered-employees-component', require('./components/RegisteredEmployees.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

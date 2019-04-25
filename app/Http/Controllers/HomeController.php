@@ -25,4 +25,9 @@ class HomeController extends Controller
   {
     return view('home');
   }
+
+  public function registeredEmployees()
+  {
+    return view('registered_employees');
+  }
 }
