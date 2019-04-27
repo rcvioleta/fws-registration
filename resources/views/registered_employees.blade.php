@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Registered Employees</div>
+                <div class="card-header">Registered Employees <button id="print-report" class="btn btn-sm btn-primary float-right" onclick="window.print()">PRINT REPORT</button></div>
 
                 <div class="card-body">
                     @if (session('status'))

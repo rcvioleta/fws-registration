@@ -25,9 +25,9 @@
           <td>{{ employee.first_name }}</td>
           <td>{{ employee.last_name }}</td>
           <td>{{ employee.project }}</td>
-          <td>
-            <button class="btn btn-sm btn-success" disabled v-if="employee.registered">Yes</button>
-            <button class="btn btn-sm btn-danger" disabled v-else>Not Yet</button>
+          <td class="text-center">
+            <strong class="text-success" disabled v-if="employee.registered">Yes</strong>
+            <strong class="text-danger" disabled v-else>No</strong>
           </td>
         </tr>
       </tbody>
@@ -37,34 +37,36 @@
 </template>
 
 <script>
-  import axios from 'axios';
-  export default {
-    data() {
-      return {
-        employees: "",
-        searchKey: ""
-      }
-    },
-    created() {   
-      this.fetchAllEmployees()
-    },
-    methods: {
-      fetchAllEmployees() {
-        axios
+import axios from "axios";
+export default {
+  data() {
+    return {
+      employees: "",
+      searchKey: ""
+    };
+  },
+  created() {
+    this.fetchAllEmployees();
+  },
+  methods: {
+    fetchAllEmployees() {
+      axios
         .get("/admin/employee")
         .then(result => {
           this.employees = result.data.data;
           console.log(result);
         })
         .catch(err => console.log("error found", err));
-      }
-    },
-    computed: {
-      filteredEmployees() {
-        return this.employees.filter(employee => {
-          return employee.last_name.toLowerCase().match(this.searchKey.toLowerCase());
-        });
-      }
-    },
+    }
+  },
+  computed: {
+    filteredEmployees() {
+      return this.employees.filter(employee => {
+        return employee.last_name
+          .toLowerCase()
+          .match(this.searchKey.toLowerCase());
+      });
+    }
   }
+};
 </script>

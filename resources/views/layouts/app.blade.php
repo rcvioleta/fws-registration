@@ -18,6 +18,63 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+      @media print {
+        .navbar,
+        .card-header,
+        .form-group {
+          display: none;
+          border: 0;
+          height: 0;
+          width: 0;
+        }
+
+        .py-4 {
+          padding: 0;
+        }
+
+        .container {
+          width: 50% !important;
+          margin: 0 auto;
+          position: absolute !important;
+          z-index: -1;
+        }
+
+        .row.justify-content-center {
+          height: 50% !important;
+          margin: 0;
+        }
+
+        .card {
+          display: block !important;
+        }
+
+        .card-body {
+          margin: 0 !important;
+          padding: 0 !important;
+          background: transparent !important;
+        }
+
+        .card-body table {
+          margin: 0 !important;
+          padding: 0 !important;
+          display: block !important;
+          background: transparent !important;
+          border: none;
+        }
+
+        .table.table-striped.mt-4 {
+          margin: 0 !important;
+          background: transparent !important;
+        }
+
+        table, th, td {
+          border-collapse: collapse;
+          background-color: red !important;
+        }
+      }
+    </style>
 </head>
 <body>
     <div id="app">

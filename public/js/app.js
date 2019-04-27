@@ -37439,23 +37439,20 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(employee.project))]),
                 _vm._v(" "),
-                _c("td", [
+                _c("td", { staticClass: "text-center" }, [
                   employee.registered
                     ? _c(
-                        "button",
+                        "strong",
                         {
-                          staticClass: "btn btn-sm btn-success",
+                          staticClass: "text-success",
                           attrs: { disabled: "" }
                         },
                         [_vm._v("Yes")]
                       )
                     : _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-sm btn-danger",
-                          attrs: { disabled: "" }
-                        },
-                        [_vm._v("Not Yet")]
+                        "strong",
+                        { staticClass: "text-danger", attrs: { disabled: "" } },
+                        [_vm._v("No")]
                       )
                 ])
               ])
